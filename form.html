@@ -189,8 +189,8 @@ input,select,textarea{font-size:16px}
       <div class="field"><label for="bib">Nama BIB <em class="req">*</em></label><input id="bib" required maxlength="16" spellcheck="false" placeholder="Nama pada nomor dada"><span class="hint">Maksimal 16 karakter.</span></div>
       <div class="field"><label for="jersey">Size Jersey <em class="req">*</em></label><select id="jersey" required><option value="">Pilih ukuran</option><option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option><option>3XL</option></select></div>
       <div class="field full"><span class="field-label">Panduan ukuran jersey</span>
-        <div class="chart-frame" id="chartFrame"><img id="chartImg" class="chart" src="sizechart.jpg" alt="Size chart jersey" decoding="async"></div>
-        <span id="chartMissing" class="hint invalid" hidden>File sizechart.jpg belum ditemukan. Simpan file tersebut di folder yang sama dengan form.html.</span>
+        <div class="chart-frame" id="chartFrame"><img id="chartImg" class="chart" src="assets/img/sizechart.jpg" alt="Size chart jersey" decoding="async"></div>
+        <span id="chartMissing" class="hint invalid" hidden>File assets/img/sizechart.jpg belum ditemukan. Pastikan folder assets/img berada di lokasi yang sama dengan form.html.</span>
       </div>
       <div class="field full"><label for="medical">Apakah Ada Penyakit Bawaan Lahir / Kondisi Medis? <em class="req">*</em></label><select id="medical" required><option value="">Pilih jawaban</option><option value="Tidak ada">Tidak ada</option><option value="Ada">Ada</option></select></div>
       <div class="field full" id="medicalExtra" hidden><label for="medicalDetail">Jelaskan kondisi medis</label><textarea id="medicalDetail" placeholder="Tuliskan informasi yang perlu diketahui petugas"></textarea></div>
@@ -216,8 +216,8 @@ input,select,textarea{font-size:16px}
     <div class="payment">
       <h3>PEMBAYARAN QRIS</h3>
       <p>Pindai QRIS resmi penyelenggara. Pastikan nama merchant dan nominal sesuai sebelum menyelesaikan transaksi.</p>
-      <div class="qris-frame" id="qrisFrame"><img id="qrisImg" class="qris" src="qris.png" alt="QRIS pembayaran" decoding="async"></div>
-      <div id="qrisMissing" class="notice" hidden>File qris.png belum ditemukan. Letakkan QRIS resmi di folder yang sama dengan form.html.</div>
+      <div class="qris-frame" id="qrisFrame"><img id="qrisImg" class="qris" src="assets/img/qris.png" alt="QRIS pembayaran" decoding="async"></div>
+      <div id="qrisMissing" class="notice" hidden>File assets/img/qris.png belum ditemukan. Pastikan folder assets/img berada di lokasi yang sama dengan form.html.</div>
       <div class="notice"><b>Perhatian:</b> Lakukan pembayaran hanya melalui kanal resmi penyelenggara.</div>
     </div>
     <div class="field">
@@ -255,7 +255,7 @@ input,select,textarea{font-size:16px}
 (()=>{
 "use strict";
 const $=id=>document.getElementById(id);
-const PRICES={"5K":225000,"10K":300000,"HM":375000,"FM":450000};
+const PRICES={"5K":150000,"10K":250000,"HM":350000,"FM":550000};
 const LABELS={"5K":"5K Run","10K":"10K Run","HM":"Half Marathon (21,1K)","FM":"Full Marathon (42,195K)"};
 const form=$("form"),timerEl=$("timer"),categoryEl=$("category"),proofEl=$("proof"),fileNameEl=$("fileName"),previewEl=$("preview"),submitEl=$("submit");
 const pages=[...document.querySelectorAll(".page")],steps=[...document.querySelectorAll(".step")];
