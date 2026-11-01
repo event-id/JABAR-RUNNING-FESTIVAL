@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#780008">
+<title>Form Pendaftaran — Jabar Running Festival 2027</title>
+<meta name="description" content="Formulir pendaftaran peserta Jabar Running Festival 2027 — pilih kategori 5K, 10K, Half Marathon, atau Full Marathon, lengkapi data diri, dan selesaikan pembayaran QRIS.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Jabar Running Festival 2027">
+<meta property="og:title" content="Form Pendaftaran — Jabar Running Festival 2027">
+<meta property="og:description" content="Pilih kategori 5K, 10K, Half Marathon, atau Full Marathon, lengkapi data diri, dan selesaikan pembayaran QRIS.">
+<meta property="og:locale" content="id_ID">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='14'%20fill='%23a9000a'/%3E%3Ctext%20x='32'%20y='45'%20font-family='Arial,sans-serif'%20font-size='30'%20font-weight='900'%20fill='%23fff'%20text-anchor='middle'%3EJF%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--red:#c90012;--red-deep:#780008;--gold:#e9b949;--ink:#1b1415;--muted:#7d7170;--line:#f0e4e1;--soft:#fdf5f4;--font:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+*{box-sizing:border-box}
+::selection{background:rgba(201,0,18,.14)}
+body{margin:0;background:#f5efec;color:var(--ink);font-family:var(--font);line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(620px circle at 90% -5%,rgba(201,0,18,.06),transparent 60%),radial-gradient(520px circle at -8% 60%,rgba(201,0,18,.05),transparent 55%)}
+button,input,select,textarea{font:inherit}
+
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(22px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{50%{opacity:.55}}
+@keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes pop{from{transform:scale(.94);opacity:0}to{transform:scale(1);opacity:1}}
+
+.top{position:relative;overflow:hidden;background:linear-gradient(125deg,#4d0005 0%,#8f000c 45%,#c90012 78%,#dc1024 100%);color:#fff;text-align:center;padding:30px 18px 34px}
+.top::before,.top::after{content:"";position:absolute;border-radius:50%;pointer-events:none}
+.top::before{width:400px;height:400px;top:-180px;right:-110px;background:radial-gradient(circle,rgba(255,130,140,.38),transparent 62%);animation:float 9s ease-in-out infinite}
+.top::after{width:320px;height:320px;bottom:-190px;left:-100px;background:radial-gradient(circle,rgba(233,185,73,.22),transparent 62%);animation:float 11s ease-in-out infinite reverse}
+.top>*{position:relative;z-index:1}
+.brand{font-size:10px;font-weight:800;letter-spacing:.3em;color:var(--gold)}
+.timer-label{font-size:9.5px;letter-spacing:.24em;margin-top:14px;color:#ffc7cb;font-weight:600;text-transform:uppercase}
+.timer{font-size:40px;font-weight:800;letter-spacing:.05em;font-variant-numeric:tabular-nums;text-shadow:0 6px 26px rgba(0,0,0,.28)}
+.timer.warning{color:#ffb9be;animation:pulse 1s infinite}
+.timer-hint{font-size:9.5px;color:#ffd7da;letter-spacing:.04em}
+
+.wrap{width:min(820px,calc(100% - 26px));margin:0 auto 60px;animation:rise .5s ease both}
+.steps{display:flex;justify-content:center;align-items:center;gap:10px;margin:28px 0 18px;flex-wrap:wrap}
+.step{display:flex;align-items:center;gap:8px;color:#9a8d89;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;transition:color .2s}
+.step b{width:28px;height:28px;border-radius:50%;background:#eae1de;display:grid;place-items:center;font-weight:800;transition:background .2s,color .2s,box-shadow .2s}
+.step.active,.step.done{color:var(--red)}
+.step.active b{background:linear-gradient(135deg,#d51024,#8c000e);color:#fff;box-shadow:0 8px 18px rgba(201,0,18,.3)}
+.step.done b{background:#fdecef;color:var(--red);border:1px solid #f3d3d8}
+.step-line{height:1.5px;width:34px;background:linear-gradient(90deg,#e5d9d5,#d6c8c4);border-radius:2px}
+.panel{background:#fff;border:1px solid rgba(148,20,25,.08);border-radius:20px;box-shadow:0 30px 70px -22px rgba(80,10,12,.26);overflow:hidden}
+.page{display:none}
+.page.active{display:block;animation:fade .3s ease both}
+.page::before{content:"";display:block;height:6px;background:linear-gradient(90deg,var(--red-deep),var(--red) 45%,#e52337 75%,var(--gold))}
+
+.head{padding:28px 32px 22px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fffaf8,#fff)}
+.eyebrow{font-size:10px;color:var(--red);font-weight:800;letter-spacing:.24em}
+h1{font-size:clamp(24px,5vw,32px);line-height:1.05;margin:9px 0 7px;letter-spacing:-.03em;text-transform:uppercase;font-weight:800}
+h1:focus{outline:none}
+.sub{font-size:12.5px;line-height:1.65;color:var(--muted);margin:0}
+.body{padding:28px 32px 32px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:17px 18px}
+.field{display:flex;flex-direction:column;gap:7px;min-width:0}
+.full{grid-column:1/-1}
+label,.field-label{font-size:11px;font-weight:700;color:#463a3c}
+.req{color:var(--red);font-style:normal}
+input,select,textarea{width:100%;border:1.5px solid #e7d9d5;border-radius:11px;padding:12px 14px;background:#fff;color:var(--ink);outline:none;font-size:13px;min-height:47px;transition:border-color .2s,box-shadow .2s}
+input::placeholder,textarea::placeholder{color:#c2b4b1}
+input:hover,select:hover,textarea:hover{border-color:#d9c5c1}
+input:focus,select:focus,textarea:focus{border-color:var(--red);box-shadow:0 0 0 4px rgba(201,0,18,.1)}
+select{appearance:none;-webkit-appearance:none;padding-right:42px;background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' fill='none' stroke='%237d7170' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 15px center}
+textarea{min-height:84px;resize:vertical}
+.hint{font-size:10px;color:#8b807d;line-height:1.5}
+.hint.invalid{color:var(--red);font-weight:700}
+.radios{display:flex;gap:18px;padding:9px 0}
+.radios label{display:flex;gap:7px;align-items:center;font-weight:600;font-size:12.5px;color:var(--ink)}
+.radios input,.check input{width:17px;height:17px;min-height:0;padding:0;border:0;margin:0;accent-color:var(--red);cursor:pointer;flex:0 0 auto}
+input[type=checkbox]:focus-visible,input[type=radio]:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+
+.actions{display:flex;justify-content:space-between;gap:12px;margin-top:26px;padding-top:19px;border-top:1px solid var(--line)}
+.actions .btn:last-child{margin-left:auto}
+.btn{position:relative;border:0;border-radius:12px;padding:15px 22px;background:linear-gradient(135deg,#d51024,#8c000e);color:#fff;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;box-shadow:0 12px 26px rgba(201,0,18,.3);transition:transform .15s,box-shadow .2s,filter .2s}
+.btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 16px 34px rgba(201,0,18,.38);filter:brightness(1.05)}
+.btn:active:not(:disabled){transform:translateY(0)}
+.btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.btn.secondary{background:#f1eae7;color:#5a4d4a;box-shadow:none;border:1px solid #e5dad6}
+.btn.secondary:hover:not(:disabled){background:#faf4f2;transform:translateY(-2px);box-shadow:none;filter:none}
+.btn:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+
+.chart-frame{width:100%;max-width:520px;margin:2px auto;padding:12px;background:#fff;border:1px solid #f0e0dd;border-radius:14px;box-shadow:0 14px 30px rgba(80,10,12,.08)}
+.chart{display:block;width:100%;max-height:220px;object-fit:contain;border-radius:8px}
+.summary{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:20px}
+.sum-title{padding:13px 16px;background:linear-gradient(90deg,#fdf3f2,#fff);border-bottom:1px solid var(--line);font-size:10px;font-weight:800;letter-spacing:.16em;color:var(--red)}
+.sum-row{display:flex;justify-content:space-between;gap:12px;padding:11px 16px;border-top:1px solid #f5ece9;font-size:12.5px}
+.sum-row:first-of-type{border-top:0}
+.sum-row span{color:var(--muted)}
+.sum-row strong{text-align:right;overflow-wrap:anywhere;font-weight:700}
+.total{display:flex;justify-content:space-between;align-items:center;padding:16px;background:linear-gradient(135deg,#fff4f3,#ffeceb);color:#a9000b;font-weight:800;border-top:1px solid #f6d9d7}
+.total strong{font-size:24px;font-variant-numeric:tabular-nums}
+
+.payment{position:relative;border:1.5px solid #f3dade;background:linear-gradient(180deg,#fffdfd,#fff);border-radius:16px;padding:20px;margin-bottom:20px;overflow:hidden}
+.payment::before{content:"";position:absolute;inset:0;background:radial-gradient(320px circle at 50% -30%,rgba(201,0,18,.07),transparent 60%);pointer-events:none}
+.payment>*{position:relative}
+.payment h3{font-size:12px;margin:0 0 6px;letter-spacing:.14em;color:var(--red);font-weight:800}
+.payment p{font-size:11px;color:var(--muted);line-height:1.65;margin:0 0 12px}
+.payment .notice{margin-top:12px}
+.qris-frame{width:min(100%,320px);margin:6px auto 12px;padding:12px;background:#fff;border:1px solid #f0e0dd;border-radius:14px;box-shadow:0 16px 34px rgba(80,10,12,.1)}
+.qris{display:block;width:100%;max-height:340px;object-fit:contain;border-radius:8px}
+.notice{background:var(--soft);border:1px solid #f3d9db;padding:13px 15px;border-radius:10px;color:#70494d;font-size:11px;line-height:1.65}
+.notice b{color:var(--red)}
+
+.upload{position:relative;display:block;border:1.5px dashed #d9c6c2;background:#fcf9f8;border-radius:14px;padding:24px 18px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;overflow:hidden}
+.upload:hover{border-color:var(--red);background:#fff}
+.upload input{position:absolute;inset:0;width:100%;height:100%;min-height:0;opacity:0;border:0;padding:0;margin:0;cursor:pointer}
+.upload-icon{display:grid;place-items:center;width:46px;height:46px;margin:0 auto 10px;border-radius:13px;background:#fff;border:1px solid #f0e0dd;box-shadow:0 10px 20px rgba(80,10,12,.08)}
+.upload-icon svg{width:22px;height:22px;stroke:var(--red);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.upload b{display:block;font-size:12.5px;font-weight:700}
+.upload .hint{margin-top:3px}
+.preview{display:none;max-width:170px;max-height:170px;object-fit:contain;margin:12px auto 4px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.checks{display:grid;gap:12px;margin:20px 0;padding:18px;background:var(--soft);border:1px solid #f6e3e4;border-radius:14px}
+.check{display:flex;align-items:flex-start;gap:11px;margin:0;font-size:12px;line-height:1.6;color:#594f4c;cursor:pointer}
+.disclaimer{font-size:10.5px;line-height:1.65;color:#827875;background:#f8f4f2;padding:13px 15px;border-radius:12px;border:1px solid #eee3df}
+
+.overlay{display:none;position:fixed;z-index:10;inset:0;background:radial-gradient(circle at center,#a1000e,#5c0006 62%,#1d0003);color:#fff;align-items:center;justify-content:center;text-align:center;padding:24px}
+.overlay.show{display:flex}
+.loader{max-width:500px;animation:pop .35s ease both}
+.spinner{position:relative;width:66px;height:66px;margin:0 auto 26px}
+.spinner::before,.spinner::after{content:"";position:absolute;border-radius:50%;border:4px solid transparent}
+.spinner::before{inset:0;border-top-color:#fff;animation:spin .9s linear infinite}
+.spinner::after{inset:9px;border-bottom-color:var(--gold);animation:spin .7s linear infinite reverse}
+.load-kicker{font-size:9.5px;letter-spacing:.28em;color:var(--gold);font-weight:800}
+.load-title{font-size:clamp(26px,6vw,42px);font-weight:800;letter-spacing:-.03em;text-transform:uppercase;margin:13px 0}
+.load-message{font-size:13px;color:#ffe2e3;line-height:1.7;min-height:46px}
+.progress{height:6px;background:rgba(255,255,255,.16);border-radius:20px;overflow:hidden;margin:26px auto 12px;max-width:340px}
+.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#ff5f6d,#ffd7da,#fff);transition:width 1s linear}
+.load-time{font-size:11px;letter-spacing:.2em;font-variant-numeric:tabular-nums;color:#ffd7da}
+
+@media(max-width:600px){
+.top{padding:24px 16px 28px}
+.wrap{width:calc(100% - 20px);margin:0 auto 44px}
+.head{padding:22px 20px 18px}
+.body{padding:22px 20px}
+.grid{grid-template-columns:1fr;gap:15px}
+.full{grid-column:auto}
+.step{font-size:8.5px}
+.step b{width:25px;height:25px}
+.step-line{width:16px}
+.actions .btn{flex:1;padding:14px 10px}
+.timer{font-size:33px}
+.total strong{font-size:21px}
+input,select,textarea{font-size:16px}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand">JABAR RUNNING FESTIVAL 2027 · REGISTRATION</div>
+  <div class="timer-label">Selesaikan pendaftaran dalam</div>
+  <div class="timer" id="timer" role="timer" aria-label="Sisa waktu sesi pendaftaran">07:00</div>
+  <div class="timer-hint">Time Out</div>
+</header>
+<main class="wrap">
+<nav class="steps" aria-label="Langkah pendaftaran"><div class="step active" data-step="1" aria-current="step"><b>1</b> Data Diri</div><i class="step-line"></i><div class="step" data-step="2"><b>2</b> Perlombaan</div><i class="step-line"></i><div class="step" data-step="3"><b>3</b> Ringkasan</div></nav>
+<form id="form" novalidate>
+<section class="panel page active" id="page1" aria-labelledby="h1page1">
+  <div class="head"><div class="eyebrow">STEP 01 / 03</div><h1 id="h1page1">Data Diri Peserta</h1><p class="sub">Lengkapi informasi pribadi sesuai identitas resmi Anda.</p></div>
+  <div class="body">
+    <div class="grid">
+      <div class="field full"><label for="name">Nama Lengkap <em class="req">*</em></label><input id="name" required autocomplete="name" placeholder="Nama sesuai identitas"></div>
+      <div class="field"><label for="birthPlace">Tempat Lahir <em class="req">*</em></label><input id="birthPlace" required placeholder="Contoh: Bandung"></div>
+      <div class="field"><label for="birthDate">Tanggal Lahir <em class="req">*</em></label><input id="birthDate" type="date" required autocomplete="bday"></div>
+      <div class="field"><span class="field-label">Jenis Kelamin <em class="req">*</em></span><div class="radios"><label><input type="radio" name="gender" value="Laki-laki" required> Laki-laki</label><label><input type="radio" name="gender" value="Perempuan"> Perempuan</label></div></div>
+      <div class="field"><label for="idType">Jenis Identitas <em class="req">*</em></label><select id="idType" required><option value="">Pilih identitas</option><option>KTP</option><option>SIM</option><option>Paspor</option><option>Kartu Pelajar</option></select></div>
+      <div class="field"><label for="idNumber">Nomor Identitas <em class="req">*</em></label><input id="idNumber" required spellcheck="false" placeholder="Nomor identitas"></div>
+      <div class="field"><label for="email">Email Aktif <em class="req">*</em></label><input id="email" type="email" required autocomplete="email" placeholder="nama@email.com"></div>
+      <div class="field"><label for="whatsapp">No. WhatsApp <em class="req">*</em></label><input id="whatsapp" type="tel" required autocomplete="tel" spellcheck="false" placeholder="08xxxxxxxxxx"></div>
+      <div class="field full"><label for="address">Alamat Lengkap <em class="req">*</em></label><textarea id="address" required autocomplete="street-address" placeholder="Jalan, RT/RW, kelurahan, kecamatan, kota, provinsi"></textarea></div>
+    </div>
+    <div class="actions"><button type="button" class="btn" data-next="1">Lanjut ke Perlombaan →</button></div>
+  </div>
+</section>
+<section class="panel page" id="page2" aria-labelledby="h1page2">
+  <div class="head"><div class="eyebrow">STEP 02 / 03</div><h1 id="h1page2">Perlombaan</h1><p class="sub">Tentukan kategori, identitas race, dan informasi kontak darurat.</p></div>
+  <div class="body">
+    <div class="grid">
+      <div class="field full"><label for="category">Category / Kategori <em class="req">*</em></label><select id="category" required><option value="">Pilih kategori</option><option value="5K">5K Run</option><option value="10K">10K Run</option><option value="HM">Half Marathon (21,1K)</option><option value="FM">Full Marathon (42,195K)</option></select></div>
+      <div class="field"><label for="bib">Nama BIB <em class="req">*</em></label><input id="bib" required maxlength="16" spellcheck="false" placeholder="Nama pada nomor dada"><span class="hint">Maksimal 16 karakter.</span></div>
+      <div class="field"><label for="jersey">Size Jersey <em class="req">*</em></label><select id="jersey" required><option value="">Pilih ukuran</option><option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option><option>3XL</option></select></div>
+      <div class="field full"><span class="field-label">Panduan ukuran jersey</span>
+        <div class="chart-frame" id="chartFrame"><img id="chartImg" class="chart" src="sizechart.jpg" alt="Size chart jersey" decoding="async"></div>
+        <span id="chartMissing" class="hint invalid" hidden>File sizechart.jpg belum ditemukan. Simpan file tersebut di folder yang sama dengan form.html.</span>
+      </div>
+      <div class="field full"><label for="medical">Apakah Ada Penyakit Bawaan Lahir / Kondisi Medis? <em class="req">*</em></label><select id="medical" required><option value="">Pilih jawaban</option><option value="Tidak ada">Tidak ada</option><option value="Ada">Ada</option></select></div>
+      <div class="field full" id="medicalExtra" hidden><label for="medicalDetail">Jelaskan kondisi medis</label><textarea id="medicalDetail" placeholder="Tuliskan informasi yang perlu diketahui petugas"></textarea></div>
+      <div class="field"><label for="emergencyName">Nama Kontak Darurat <em class="req">*</em></label><input id="emergencyName" required placeholder="Nama keluarga / kerabat"></div>
+      <div class="field"><label for="emergencyPhone">No. Kontak Darurat <em class="req">*</em></label><input id="emergencyPhone" type="tel" required spellcheck="false" placeholder="08xxxxxxxxxx"></div>
+    </div>
+    <div class="actions"><button type="button" class="btn secondary" data-back="1">← Kembali</button><button type="button" class="btn" data-next="2">Lanjut ke Ringkasan →</button></div>
+  </div>
+</section>
+<section class="panel page" id="page3" aria-labelledby="h1page3">
+  <div class="head"><div class="eyebrow">STEP 03 / 03</div><h1 id="h1page3">Ringkasan Data Peserta</h1><p class="sub">Periksa kembali data, ikuti instruksi pembayaran, dan lampirkan bukti transaksi.</p></div>
+  <div class="body">
+    <div class="summary">
+      <div class="sum-title">RINGKASAN PESERTA</div>
+      <div class="sum-row"><span>Nama peserta</span><strong id="sName">—</strong></div>
+      <div class="sum-row"><span>Email</span><strong id="sEmail">—</strong></div>
+      <div class="sum-row"><span>WhatsApp</span><strong id="sPhone">—</strong></div>
+      <div class="sum-row"><span>Kategori</span><strong id="sCategory">—</strong></div>
+      <div class="sum-row"><span>Nama BIB</span><strong id="sBib">—</strong></div>
+      <div class="sum-row"><span>Size jersey</span><strong id="sJersey">—</strong></div>
+      <div class="total"><span>TOTAL OTOMATIS</span><strong id="sTotal">Rp0</strong></div>
+    </div>
+    <div class="payment">
+      <h3>PEMBAYARAN QRIS</h3>
+      <p>Pindai QRIS resmi penyelenggara. Pastikan nama merchant dan nominal sesuai sebelum menyelesaikan transaksi.</p>
+      <div class="qris-frame" id="qrisFrame"><img id="qrisImg" class="qris" src="qris.png" alt="QRIS pembayaran" decoding="async"></div>
+      <div id="qrisMissing" class="notice" hidden>File qris.png belum ditemukan. Letakkan QRIS resmi di folder yang sama dengan form.html.</div>
+      <div class="notice"><b>Perhatian:</b> Lakukan pembayaran hanya melalui kanal resmi penyelenggara.</div>
+    </div>
+    <div class="field">
+      <span class="field-label">Upload Bukti Pembayaran <em class="req">*</em></span>
+      <label class="upload">
+        <input id="proof" type="file" accept=".jpg,.jpeg,.png,.pdf,image/jpeg,image/png,application/pdf" required>
+        <span class="upload-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="16 16 12 12 8 16"></polyline><line x1="12" y1="12" x2="12" y2="21"></line><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path></svg></span>
+        <b>Pilih file bukti pembayaran</b>
+        <span class="hint">JPG, PNG, atau PDF · Maksimal 5 MB</span>
+        <img id="preview" class="preview" alt="Preview bukti">
+        <span class="hint" id="fileName" aria-live="polite"></span>
+      </label>
+    </div>
+    <div class="checks">
+      <label class="check"><input id="agree1" type="checkbox"><span>Saya menyatakan seluruh data yang diberikan benar dan dapat dipertanggungjawabkan.</span></label>
+      <label class="check"><input id="agree2" type="checkbox"><span>Saya telah membaca dan menyetujui syarat, ketentuan, serta kebijakan perlombaan.</span></label>
+    </div>
+    <div class="disclaimer">Catatan: halaman HTML mandiri ini hanya menampilkan simulasi proses. Data dan bukti pembayaran belum dikirim ke server dan pembayaran belum diverifikasi. Integrasi backend diperlukan agar panitia benar-benar menerima pendaftaran dan lampiran.</div>
+    <div class="actions"><button type="button" class="btn secondary" data-back="2">← Kembali</button><button type="button" class="btn" id="submit" disabled>DAFTAR SEKARANG →</button></div>
+  </div>
+</section>
+</form>
+</main>
+<div class="overlay" id="overlay" role="status" aria-live="polite">
+  <div class="loader">
+    <div class="spinner"></div>
+    <div class="load-kicker">JABAR RUNNING FESTIVAL 2027</div>
+    <div class="load-title">Memproses pendaftaran</div>
+    <div class="load-message" id="message">Menyiapkan data peserta Anda...</div>
+    <div class="progress"><span id="bar"></span></div>
+    <div class="load-time" id="loadTime">03:00</div>
+  </div>
+</div>
+<script>
+(()=>{
+"use strict";
+const $=id=>document.getElementById(id);
+const PRICES={"5K":225000,"10K":300000,"HM":375000,"FM":450000};
+const LABELS={"5K":"5K Run","10K":"10K Run","HM":"Half Marathon (21,1K)","FM":"Full Marathon (42,195K)"};
+const form=$("form"),timerEl=$("timer"),categoryEl=$("category"),proofEl=$("proof"),fileNameEl=$("fileName"),previewEl=$("preview"),submitEl=$("submit");
+const pages=[...document.querySelectorAll(".page")],steps=[...document.querySelectorAll(".step")];
+const fmt=new Intl.NumberFormat("id-ID",{style:"currency",currency:"IDR",maximumFractionDigits:0});
+const two=n=>String(n).padStart(2,"0");
+
+const preset=(new URLSearchParams(location.search).get("category")||"").toUpperCase();
+if(PRICES[preset])categoryEl.value=preset;
+const now=new Date();
+$("birthDate").max=now.getFullYear()+"-"+two(now.getMonth()+1)+"-"+two(now.getDate());
+pages.forEach(p=>{p.querySelector("h1").tabIndex=-1;});
+
+let stopped=false;
+const deadline=Date.now()+420000;
+function paintTimer(){
+  const left=Math.max(0,Math.ceil((deadline-Date.now())/1000));
+  timerEl.textContent=two(Math.floor(left/60))+":"+two(left%60);
+  timerEl.classList.toggle("warning",left<=10);
+  return left;
+}
+paintTimer();
+const countdown=setInterval(()=>{
+  if(stopped)return;
+  if(paintTimer()===0){clearInterval(countdown);location.href="failed.html";}
+},1000);
+
+function activate(n){
+  pages.forEach(p=>p.classList.toggle("active",p.id==="page"+n));
+  steps.forEach(s=>{
+    const k=+s.dataset.step,past=k<n;
+    s.classList.toggle("active",k===n);
+    s.classList.toggle("done",past);
+    s.querySelector("b").textContent=past?"✓":k;
+    if(k===n)s.setAttribute("aria-current","step");
+    else s.removeAttribute("aria-current");
+  });
+  window.scrollTo({top:0,behavior:"smooth"});
+  $("page"+n).querySelector("h1").focus({preventScroll:true});
+}
+
+function validate(pageEl){
+  for(const el of pageEl.querySelectorAll("[required]")){
+    if(el.offsetParent===null)continue;
+    if(el.type==="radio"){
+      if(!pageEl.querySelector('input[name="'+el.name+'"]:checked')){el.reportValidity();el.focus();return false;}
+    }else if(!el.checkValidity()){el.reportValidity();el.focus();return false;}
+  }
+  return true;
+}
+
+function paintSummary(){
+  const c=categoryEl.value;
+  $("sName").textContent=$("name").value.trim();
+  $("sEmail").textContent=$("email").value.trim();
+  $("sPhone").textContent=$("whatsapp").value.trim();
+  $("sCategory").textContent=LABELS[c]||"—";
+  $("sBib").textContent=$("bib").value.trim();
+  $("sJersey").textContent=$("jersey").value;
+  $("sTotal").textContent=fmt.format(PRICES[c]||0);
+}
+
+document.querySelectorAll("[data-next]").forEach(b=>b.addEventListener("click",()=>{
+  const n=+b.dataset.next;
+  if(validate($("page"+n))){
+    if(n===2)paintSummary();
+    activate(n+1);
+  }
+}));
+document.querySelectorAll("[data-back]").forEach(b=>b.addEventListener("click",()=>activate(+b.dataset.back)));
+
+categoryEl.addEventListener("change",paintSummary);
+$("medical").addEventListener("change",()=>{
+  const yes=$("medical").value==="Ada";
+  $("medicalExtra").hidden=!yes;
+  $("medicalDetail").required=yes;
+});
+
+function checkFinal(){
+  submitEl.disabled=!(proofEl.files.length&&$("agree1").checked&&$("agree2").checked);
+}
+proofEl.addEventListener("change",()=>{
+  const f=proofEl.files[0];
+  previewEl.style.display="none";
+  fileNameEl.classList.remove("invalid");
+  fileNameEl.textContent="";
+  if(!f){checkFinal();return;}
+  if(!["image/jpeg","image/png","application/pdf"].includes(f.type)){
+    fileNameEl.textContent="Format harus JPG, PNG, atau PDF.";
+    fileNameEl.classList.add("invalid");
+    proofEl.value="";
+    checkFinal();
+    return;
+  }
+  if(f.size>5*1024*1024){
+    fileNameEl.textContent="Ukuran file maksimal 5 MB.";
+    fileNameEl.classList.add("invalid");
+    proofEl.value="";
+    checkFinal();
+    return;
+  }
+  fileNameEl.textContent="File dipilih: "+f.name;
+  if(f.type.startsWith("image/")){
+    const r=new FileReader();
+    r.onload=e=>{previewEl.src=e.target.result;previewEl.style.display="block";};
+    r.readAsDataURL(f);
+  }
+  checkFinal();
+});
+["agree1","agree2"].forEach(id=>$(id).addEventListener("change",checkFinal));
+
+[["qrisImg","qrisFrame","qrisMissing"],["chartImg","chartFrame","chartMissing"]].forEach(([imgId,frameId,noticeId])=>{
+  const img=$(imgId);
+  if(!img)return;
+  const fail=()=>{$(frameId).style.display="none";$(noticeId).hidden=false;};
+  img.addEventListener("error",fail);
+  if(img.complete&&img.naturalWidth===0)fail();
+});
+
+form.addEventListener("submit",e=>e.preventDefault());
+
+const MESSAGES=["Memeriksa kelengkapan informasi peserta...","Menyusun ringkasan kategori perlombaan...","Memvalidasi format lampiran pembayaran...","Menyiapkan data untuk proses registrasi...","Memastikan persetujuan peserta telah dicatat...","Menyelesaikan tahap persiapan pendaftaran..."];
+const DURATION=180,SWITCH=DURATION/MESSAGES.length;
+const messageEl=$("message"),barEl=$("bar"),loadTimeEl=$("loadTime");
+submitEl.addEventListener("click",()=>{
+  if(submitEl.disabled)return;
+  stopped=true;
+  clearInterval(countdown);
+  $("overlay").classList.add("show");
+  let elapsed=0,last=-1;
+  const interval=setInterval(()=>{
+    elapsed++;
+    const remain=Math.max(0,DURATION-elapsed);
+    loadTimeEl.textContent=two(Math.floor(remain/60))+":"+two(remain%60);
+    barEl.style.width=(elapsed/DURATION*100)+"%";
+    const idx=Math.min(MESSAGES.length-1,Math.floor(elapsed/SWITCH));
+    if(idx!==last){last=idx;messageEl.textContent=MESSAGES[idx];}
+    if(elapsed>=DURATION){
+      clearInterval(interval);
+      const data={nama:$("name").value.trim(),email:$("email").value.trim(),whatsapp:$("whatsapp").value.trim(),kategori:LABELS[categoryEl.value]||categoryEl.value,namaBib:$("bib").value.trim(),jersey:$("jersey").value,total:PRICES[categoryEl.value]||0,namaFileBukti:proofEl.files[0]?.name||"",status:"Menunggu verifikasi panitia",waktu:new Date().toISOString()};
+      try{sessionStorage.setItem("jrfRegistration",JSON.stringify(data));}catch(e){}
+      location.href="success.html";
+    }
+  },1000);
+});
+})();
+</script>
+</body>
+</html>
